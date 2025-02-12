@@ -1,0 +1,80 @@
+namespace Deliverable1;
+
+class Account {
+    String username;
+    String password;
+    String name;
+    String number;
+    1 -- 1 Role roles;
+}
+
+class Role {
+
+}
+
+class Manager {
+    isA Role;
+}
+
+class Employee {
+    isA Role;
+}
+
+class Customer {
+    isA Role;
+    String address;
+    int points;
+}
+
+class ItemList {
+    1 -- * Item items;
+}
+
+class Item {
+    String name;
+    int price;
+    int quantity;
+    boolean perishable;
+    int loyaltyPoints;
+
+    * -- * Order orders;
+}
+
+class Order {
+
+}
+
+class GroceryOrder {
+    isA Role;
+    Delivery deliveryDate;
+    String date;
+    * -- 1 Employee employees;
+    * -- 1 Customer customers;
+}
+
+class GroceryShipment {
+    isA Role;
+    * -- 1 Manager managers;
+}
+
+// association classes:
+associationClass AssignedOrder {
+    * Employee employee;
+    * GroceryOrder order;
+    int orderNumber;
+}
+
+associationClass OrderedItem {
+    * Item item;
+    * Order order;
+    int quantityOrdered;
+}
+
+
+// enums
+enum Delivery {
+    SAMEDAY,
+    NEXTDAY,
+    TWO_DAYS,
+    THREE_DAYS
+}
