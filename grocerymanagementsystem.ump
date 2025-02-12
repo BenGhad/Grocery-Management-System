@@ -45,7 +45,7 @@ class Order {
 }
 
 class GroceryOrder {
-    isA Role;
+    isA Order;
     Delivery deliveryDate;
     String date;
     * -- 1 Employee employees;
@@ -53,7 +53,7 @@ class GroceryOrder {
 }
 
 class GroceryShipment {
-    isA Role;
+    isA Order;
     * -- 1 Manager managers;
 }
 
@@ -63,6 +63,7 @@ associationClass AssignedOrder {
     * GroceryOrder order;
     int orderNumber;
 }
+
 
 associationClass OrderedItem {
     * Item item;
