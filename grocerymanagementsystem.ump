@@ -5,7 +5,9 @@ class Account {
     String password;
     String name;
     String number;
-    1 -- 1 Role roles;
+
+    1 -- 1 Customer;
+    1 -- {0..1} Role;
 }
 
 class Role {
@@ -14,21 +16,21 @@ class Role {
 
 class Manager {
     isA Role;
+
+    1 -- * GroceryShipment;
 }
 
 class Employee {
     isA Role;
+    1 -- * GroceryOrder;
 }
 
 class Customer {
-    isA Role;
     String address;
     int points;
+    1 -- * Cart;
 }
 
-class ItemList {
-    1 -- * Item items;
-}
 
 class Item {
     String name;
@@ -37,27 +39,26 @@ class Item {
     boolean perishable;
     int loyaltyPoints;
 
-    * -- * Order orders;
+    * -- * Cart;
+    {1..*} -- * GroceryShipment;
 }
 
-class Order {
-
+class Cart {
+    int totalPrice;
+    boolean isPaid;
+    1 -- 1 GroceryOrder;
 }
+
 
 class GroceryOrder {
-    isA Order;
     Delivery deliveryDate;
     String date;
-    * -- 1 Employee employees;
-    * -- 1 Customer customers;
 }
 
 class GroceryShipment {
-    isA Order;
-    * -- 1 Manager managers;
+    Delivery deliveryDate;
 }
 
-// association classes:
 associationClass AssignedOrder {
     * Employee employee;
     * GroceryOrder order;
@@ -67,8 +68,13 @@ associationClass AssignedOrder {
 
 associationClass OrderedItem {
     * Item item;
-    * Order order;
+    * GroceryOrder order;
     int quantityOrdered;
+}
+
+associationClass ShippedItem {
+    * Item item;
+    * GroceryShipment shipment;
 }
 
 
