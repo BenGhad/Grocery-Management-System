@@ -10,18 +10,17 @@ class Account {
     1 -- {0..1} Role;
 }
 
-class Role {
+class WorkerRole {
 
 }
 
 class Manager {
-    isA Role;
-
+    isA WorkerRole;
     1 -- * GroceryShipment;
 }
 
 class Employee {
-    isA Role;
+    isA WorkerRole;
     1 -- * GroceryOrder;
 }
 
@@ -43,6 +42,14 @@ class Item {
     {1..*} -- * GroceryShipment;
 }
 
+class OrderedItem {
+    int quantityOrdered;
+    * -- * Cart;
+    * -- * GroceryShipment;
+}
+
+
+
 class Cart {
     int totalPrice;
     boolean isPaid;
@@ -56,7 +63,7 @@ class GroceryOrder {
 }
 
 class GroceryShipment {
-    Delivery deliveryDate;
+    String date;
 }
 
 associationClass AssignedOrder {
@@ -66,16 +73,7 @@ associationClass AssignedOrder {
 }
 
 
-associationClass OrderedItem {
-    * Item item;
-    * GroceryOrder order;
-    int quantityOrdered;
-}
 
-associationClass ShippedItem {
-    * Item item;
-    * GroceryShipment shipment;
-}
 
 
 // enums
