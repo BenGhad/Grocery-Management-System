@@ -37,15 +37,14 @@ class Item {
     int quantity;
     boolean perishable;
     int loyaltyPoints;
-
-    * -- * Cart;
-    {1..*} -- * GroceryShipment;
 }
 
 class OrderedItem {
     int quantityOrdered;
-    * -- * Cart;
-    * -- * GroceryShipment;
+    * -- 1 item;
+    //Constraint: must have a cart or a shipment (ie XOR which is not in umple)
+    * -- {0..1} Cart;
+    * -- {0..1} GroceryShipment;
 }
 
 
@@ -60,17 +59,14 @@ class Cart {
 class GroceryOrder {
     Delivery deliveryDate;
     String date;
+    int orderNumber;
 }
 
 class GroceryShipment {
     String date;
 }
 
-associationClass AssignedOrder {
-    * Employee employee;
-    * GroceryOrder order;
-    int orderNumber;
-}
+
 
 
 

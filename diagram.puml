@@ -1,0 +1,75 @@
+@startuml
+namespace Deliverable1 {
+
+  class Account {
+    - username: String
+    - password: String
+    - name: String
+    - number: String
+  }
+
+  class WorkerRole
+
+  class Manager
+
+  class Employee
+
+  class Customer {
+    - address: String
+    - points: int
+  }
+
+  class Item {
+    - name: String
+    - price: int
+    - quantity: int
+    - perishable: boolean
+    - loyaltyPoints: int
+  }
+
+  class OrderedItem {
+    - quantityOrdered: int
+    ' Constraint: must have a cart or a shipment (XOR)
+  }
+
+  class Cart {
+    - totalPrice: int
+    - isPaid: boolean
+  }
+
+  class GroceryOrder {
+    - deliveryDate: Delivery
+    - date: String
+    - orderNumber: int
+  }
+
+  class GroceryShipment {
+    - date: String
+  }
+
+  enum Delivery {
+    SAMEDAY
+    NEXTDAY
+    TWO_DAYS
+    THREE_DAYS
+  }
+
+  ' Inheritance
+  Manager --|> WorkerRole
+  Employee --|> WorkerRole
+
+  ' Associations
+  Account "1" -- "1" Customer
+  Account "1" -- "0..1" WorkerRole
+
+  Manager "1" -- "*" GroceryShipment
+  Employee "1" -- "*" GroceryOrder
+  Customer "1" -- "*" Cart
+
+  OrderedItem "*" -- "1" Item
+  OrderedItem "*" -- "0..1" Cart
+  OrderedItem "*" -- "0..1" GroceryShipment
+
+  Cart "1" -- "1" GroceryOrder
+}
+@enduml
