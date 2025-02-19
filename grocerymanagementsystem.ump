@@ -26,8 +26,8 @@ class Employee {
 
 class Customer {
     String address;
-    int points;
-    1 -- * Cart;
+    int totalLoyaltyPoints;
+    1 -- 1..* Cart;
 }
 
 
@@ -54,7 +54,7 @@ associationClass OrderedItem {
 class Cart {
     isA Order;
     int totalPrice;
-    boolean isPaid;
+    boolean isPaid; //Locked can't modify
     1 -- 0..1 GroceryOrder;
 }
 
@@ -67,7 +67,7 @@ class GroceryOrder {
 
 class GroceryShipment {
     isA Order;
-    String date;
+    String dateOrdered;
 }
 
 
