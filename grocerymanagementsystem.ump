@@ -7,15 +7,15 @@ class Account {
     String number;
 
     1 -- 1 Customer;
-    1 -- {0..1} Role;
-}
+    1 -- 0..1 WorkerRole;
+    }
 
 class WorkerRole {
 
 }
 
 class Manager {
-    isA WorkerRole;
+   isA WorkerRole;
     1 -- * GroceryShipment;
 }
 
@@ -34,25 +34,28 @@ class Customer {
 class Item {
     String name;
     int price;
-    int quantity;
-    boolean perishable;
+    int quantityInStock;
+    boolean isPerishable;
     int loyaltyPoints;
 }
 
-class OrderedItem {
+class Order {
+  * -- * Item;
+}
+
+associationClass OrderedItem {
     int quantityOrdered;
-    * -- 1 item;
-    //Constraint: must have a cart or a shipment (ie XOR which is not in umple)
-    * -- {0..1} Cart;
-    * -- {0..1} GroceryShipment;
+    * Order order;
+    * Item item;
 }
 
 
 
 class Cart {
+    isA Order;
     int totalPrice;
     boolean isPaid;
-    1 -- 1 GroceryOrder;
+    1 -- 0..1 GroceryOrder;
 }
 
 
@@ -63,10 +66,9 @@ class GroceryOrder {
 }
 
 class GroceryShipment {
+    isA Order;
     String date;
 }
-
-
 
 
 
@@ -79,3 +81,4 @@ enum Delivery {
     TWO_DAYS,
     THREE_DAYS
 }
+
