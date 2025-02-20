@@ -13,6 +13,7 @@ class GroceryManagementSystem {
   1 <@>- * GroceryOrder;
   1 <@>- * GroceryShipment;
 }
+
 class Account {
     String username;
     String password;
@@ -21,7 +22,7 @@ class Account {
 
     1 -- 1 Customer;
     1 -- 0..1 WorkerRole;
-    }
+}
 
 class WorkerRole {
 
@@ -39,7 +40,7 @@ class Employee {
 
 class Customer {
     String address;
-    int totalLoyaltyPoints;
+    int LoyaltyPoints;
     1 -- 1..* Cart;
 }
 
@@ -73,8 +74,8 @@ class Cart {
 
 
 class GroceryOrder {
-    Delivery deliveryDate;
-    String date;
+    ExpectedDelivery deliveryDate;
+    String dateOrdered;
     int orderNumber;
 }
 
@@ -88,10 +89,10 @@ class GroceryShipment {
 
 
 // enums
-enum Delivery {
+enum ExpectedDelivery {
     SAMEDAY,
     NEXTDAY,
-    TWO_DAYS,
-    THREE_DAYS
+    TWODAYSAFTER,
+    THREEDAYSAFTER
 }
 
